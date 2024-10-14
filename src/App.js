@@ -219,17 +219,9 @@ function App() {
 }
 */
 
-/** Об'єкти
-
-*/
-function User({ name, youtubeChanel, ...rest }) {
-  return (
-    <div>
-      <h1>{name}</h1>
-      <h2>{youtubeChanel}</h2>
-      <p>{JSON.stringify(rest)}</p>
-    </div>
-  );
+/** Conditions
+function User({ name, youtubeChanel, gender, ...rest }) {
+  return (name && <h1>{name}</h1>) || <p>No Data</p>;
 }
 
 function App() {
@@ -242,6 +234,7 @@ function App() {
   const user = {
     name: "Maksym",
     lastName: "Rudnui",
+    gender: "male",
     age: 27,
     youtubeChanel: "Maksym Rudnyi",
     isYouTuber: true,
@@ -252,26 +245,137 @@ function App() {
     },
   };
 
-  // console.log(user);
-
-  // const user2 = {
-  //   ...user,
-  //   bestFriend: {
-  //     ...user.bestFriend,
-  //   },
-  // };
-
-  // user2.name = "Oksana";
-  // user2.bestFriend.name = "Natasha";
-
-  // console.log(user2);
-
-  // опертаор Destructuring assignment -візьми об'єкт user і з нього візьміть наступні поля і створіть змінні з цими полями
   const { name, ...rest } = user;
 
   return (
     <div className="App">
-      <User name={name} channelName={user.youtubeChanel} />
+      <User {...user} />
+      <User />
+    </div>
+  );
+}
+*/
+
+/** цикл for
+function User({ name, youtubeChanel, gender, ...rest }) {
+  return (name && <h1>{name}</h1>) || <p>No Data</p>;
+}
+
+function App() {
+  const fruits = ["banana", "orange", "apple"];
+  fruits.push("mango");
+
+  // зберегли значення елементів мавсива в змінні
+  const [banana, orange, ...restFruits] = fruits;
+
+  const user = {
+    name: "Maksym",
+    lastName: "Rudnui",
+    gender: "male",
+    age: 27,
+    youtubeChanel: "Maksym Rudnyi",
+    isYouTuber: true,
+    fruits,
+    bestFriend: {
+      name: "Oksana",
+      youtubeChanel: "PhytonProgrammerGirl",
+    },
+  };
+
+  let html = [];
+  for (let i = 0; i < fruits.length; i++) {
+    html.push(
+      <p>
+        {" "}
+        {i} - {fruits[i]}{" "}
+      </p>
+    );
+  }
+
+  const { name, ...rest } = user;
+
+  return <div className="App">{html}</div>;
+}
+*/
+
+/** Об'єкти
+
+*/
+
+/** Об'єкти
+
+*/
+
+function sum(a, b) {
+  console.log("fun sum");
+
+  return a + b;
+}
+
+const multiply = function (a, b) {
+  console.log("fun mult");
+  return a * b;
+};
+
+const sum2 = (...rest) => {
+  let sum = 0;
+  for (let i = 0; i < rest.length; i++) {
+    sum += rest[i];
+  }
+
+  return sum;
+};
+
+console.log("Sum2: ", sum2(2, 3, 4, 5, 6));
+
+const myFruits = (fruits = []) => {
+  let html = [];
+
+  try {
+    for (let i = 0; i < fruits.length; i++) {
+      html.push(
+        <p>
+          {i} - {fruits[i]}
+        </p>
+      );
+    }
+  } catch (e) {
+    console.log("New error: ", e);
+    html.push(<h1>No fruits</h1>);
+  }
+
+  return html;
+};
+
+const User = ({ name = "Guest" }) => <h1>{name}</h1> || <p>No Data</p>;
+
+function App() {
+  const fruits = ["banana", "orange", "apple"];
+  fruits.push("mango");
+
+  // зберегли значення елементів мавсива в змінні
+  const [banana, orange, ...restFruits] = fruits;
+
+  const user = {
+    name: "Maksym",
+    lastName: "Rudnui",
+    gender: "male",
+    age: 27,
+    fruits,
+    youtubeChanel: "Maksym Rudnyi",
+  };
+
+  const user2 = {
+    name: "Oksana",
+  };
+
+  const { name, ...rest } = user;
+
+  const iLikeTheseFruits = myFruits();
+
+  return (
+    <div className="App">
+      <User name={user.name} />
     </div>
   );
 }
