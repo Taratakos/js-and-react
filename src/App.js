@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+// Способи оголошення даних
+let name = "Maksym";
+name = "Oksana";
+
+const firstName = "Maks";
+
+// Типи даних
+const age = 27.234;
+const isLoading = false;
+const isLogedIn = true;
+// null - коли ми не знаємо що вказати, але нам потрібне якесь значення
+const lastName = null;
 
 function App() {
+  console.log(name);
+  console.log(firstName);
+
+  console.log(age);
+
+  console.log(isLoading);
+  console.log(isLogedIn);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Привіт, JS</h1>
+      Age: {age}
     </div>
   );
 }
