@@ -1,3 +1,4 @@
+import React, { Component } from "react";
 /** 
 // Способи оголошення даних
 let name = "Maksym";
@@ -44,6 +45,8 @@ function App() {
   );
 }
 */
+
+import { render } from "@testing-library/react";
 
 /** Об'єкти
 const user = {
@@ -298,86 +301,227 @@ function App() {
 }
 */
 
-/** Об'єкти
+/** класи
+ class User {
+  constructor(userName, userAge, userChanel) {
+    this.name = userName;
+    this.age = userAge;
+    this.chanel = userChanel;
+  }
 
-*/
+  getName() {
+    console.log(this.name);
+  }
 
-/** Об'єкти
-
-*/
-
-function sum(a, b) {
-  console.log("fun sum");
-
-  return a + b;
+  sayHello() {
+    console.log(`Hello, I am ${this.age} years old`);
+  }
 }
 
-const multiply = function (a, b) {
-  console.log("fun mult");
-  return a * b;
-};
-
-const sum2 = (...rest) => {
-  let sum = 0;
-  for (let i = 0; i < rest.length; i++) {
-    sum += rest[i];
+class Admin extends User {
+  constructor(name, age, chanel, rights) {
+    super(name, age, chanel, rights);
+    this.rights = rights;
   }
 
-  return sum;
-};
+  getName() {
+    console.log("I am admin. My name is:", this.name);
+  }
+}
 
-console.log("Sum2: ", sum2(2, 3, 4, 5, 6));
-
-const myFruits = (fruits = []) => {
-  let html = [];
-
-  try {
-    for (let i = 0; i < fruits.length; i++) {
-      html.push(
-        <p>
-          {i} - {fruits[i]}
-        </p>
-      );
-    }
-  } catch (e) {
-    console.log("New error: ", e);
-    html.push(<h1>No fruits</h1>);
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      name: "Maksym",
+    };
   }
 
-  return html;
-};
-
-const User = ({ name = "Guest" }) => <h1>{name}</h1> || <p>No Data</p>;
-
-function App() {
-  const fruits = ["banana", "orange", "apple"];
-  fruits.push("mango");
-
-  // зберегли значення елементів мавсива в змінні
-  const [banana, orange, ...restFruits] = fruits;
-
-  const user = {
-    name: "Maksym",
-    lastName: "Rudnui",
-    gender: "male",
-    age: 27,
-    fruits,
-    youtubeChanel: "Maksym Rudnyi",
+  onClickHandler = () => {
+    console.log("onClick", this);
+    this.setState({
+      name: "New user name",
+    });
   };
 
-  const user2 = {
-    name: "Oksana",
+  render() {
+    return (
+      <div className="App">
+        Привіт, {this.state.name}
+        <button onClick={this.onClickHandler}>Change name</button>
+      </div>
+    );
+  }
+}
+
+export default App;
+
+*/
+
+/** Форми Form
+ * 
+ class User {
+  constructor(userName, userAge, userChanel) {
+    this.name = userName;
+    this.age = userAge;
+    this.chanel = userChanel;
+  }
+
+  getName() {
+    console.log(this.name);
+  }
+
+  sayHello() {
+    console.log(`Hello, I am ${this.age} years old`);
+  }
+}
+
+class Admin extends User {
+  constructor(name, age, chanel, rights) {
+    super(name, age, chanel, rights);
+    this.rights = rights;
+  }
+
+  getName() {
+    console.log("I am admin. My name is:", this.name);
+  }
+}
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      firstName: "",
+      email: "",
+    };
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(this.state);
+    debugger;
   };
 
-  const { name, ...rest } = user;
+  onChange = (e) => {
+    const { value, name } = e.target;
 
-  const iLikeTheseFruits = myFruits();
+    this.setState({
+      [name]: value,
+    });
+  };
 
-  return (
-    <div className="App">
-      <User name={user.name} />
-    </div>
-  );
+  render() {
+    console.log(this.state);
+    return (
+      <div className="App">
+        Привіт, {this.state.firstName}
+        <form onSubmit={this.onSubmit}>
+          <input
+            value={this.state.firstName}
+            onChange={this.onChange}
+            name="firstName"
+            type="text"
+            placeholder="enter your name"
+          ></input>
+          <input
+            value={this.state.email}
+            onChange={this.onChange}
+            name="email"
+            type="text"
+            placeholder="Enter your email"
+          ></input>
+          <button>Submit</button>
+        </form>
+      </div>
+    );
+  }
+}
+
+export default App;
+
+*/
+
+/** Об'єкти
+
+*/
+
+class User {
+  constructor(userName, userAge, userChanel) {
+    this.name = userName;
+    this.age = userAge;
+    this.chanel = userChanel;
+  }
+
+  getName() {
+    console.log(this.name);
+  }
+
+  sayHello() {
+    console.log(`Hello, I am ${this.age} years old`);
+  }
+}
+
+class Admin extends User {
+  constructor(name, age, chanel, rights) {
+    super(name, age, chanel, rights);
+    this.rights = rights;
+  }
+
+  getName() {
+    console.log("I am admin. My name is:", this.name);
+  }
+}
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      firstName: "",
+      email: "",
+    };
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(this.state);
+    debugger;
+  };
+
+  onChange = (e) => {
+    const { value, name } = e.target;
+
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  render() {
+    console.log(this.state);
+    return (
+      <div className="App">
+        Привіт, {this.state.firstName}
+        <form onSubmit={this.onSubmit}>
+          <input
+            value={this.state.firstName}
+            onChange={this.onChange}
+            name="firstName"
+            type="text"
+            placeholder="enter your name"
+          ></input>
+          <input
+            value={this.state.email}
+            onChange={this.onChange}
+            name="email"
+            type="text"
+            placeholder="Enter your email"
+          ></input>
+          <button>Submit</button>
+        </form>
+      </div>
+    );
+  }
 }
 
 export default App;
