@@ -439,13 +439,11 @@ class App extends Component {
 }
 
 export default App;
-
 */
 
-/** Об'єкти
+/** метод fetch
 
 */
-
 class User {
   constructor(userName, userAge, userChanel) {
     this.name = userName;
@@ -477,16 +475,21 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      firstName: "",
-      email: "",
+      id: "",
+      user: {},
     };
   }
 
   onSubmit = (e) => {
     e.preventDefault();
 
-    console.log(this.state);
-    debugger;
+    fetch(`https://swapi.dev/api/people/${this.state.id}`)
+      .then((response) => response.json())
+      .then((user) => {
+        this.setState({
+          user,
+        });
+      });
   };
 
   onChange = (e) => {
@@ -498,17 +501,17 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state);
+    const { id, user } = this.state;
     return (
       <div className="App">
-        Привіт, {this.state.firstName}
+        Привіт, {id}
         <form onSubmit={this.onSubmit}>
           <input
-            value={this.state.firstName}
+            value={id}
             onChange={this.onChange}
-            name="firstName"
+            name="id"
             type="text"
-            placeholder="enter your name"
+            placeholder="enter your id"
           ></input>
           <input
             value={this.state.email}
@@ -519,6 +522,8 @@ class App extends Component {
           ></input>
           <button>Submit</button>
         </form>
+        <hr></hr>
+        {JSON.stringify(user)}
       </div>
     );
   }
